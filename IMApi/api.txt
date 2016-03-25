@@ -1,0 +1,67 @@
+check_password
+
+    Method: GET
+    Type: mandatory when SCRAM is not used
+    Return values:
+        200, true or false in body
+        anything else - will be treated as false
+    Description: Must respond if the password is valid for user.
+
+get_password
+
+    Method: GET
+    Type: mandatory when SCRAM or DIGEST SASL mechanism is used
+    Return values:
+        200, password in the body
+        anything else - get_password will fail
+    Description: Must return the user's password in plaintext or in the SCRAM serialised form.
+
+user_exists
+
+    Method: GET
+    Type: mandatory
+    Return values:
+        200, true or false in body
+        anything else - will be treated as false
+    Description: Must return the information whether the user exists in DB.
+
+set_password
+
+    Method: POST
+    Type: mandatory when mod_register is enabled
+    Return values:
+        200 or 201 or 204 - success
+        anything else - will be treated as false
+    Description: Must set user's password in the internal database to a provided value. The value should not be transformed (except for URL-decoding) before writing into DB.
+
+remove_user
+
+    Method: POST
+    Type: mandatory when mod_register is enabled
+    Return values:
+        200 or 201 or 204 - success
+        404 - user does not exist
+        403 - not allowed for some reason
+        40X - will be treated as bad request
+    Description: Removes a user account.
+
+remove_user_validate
+
+    Method: POST
+    Type: mandatory when mod_register is enabled
+    Return values:
+        200 or 201 or 204 - success
+        404 - user does not exist
+        403 - invalid user password or not allowed for other reason
+        40X - will be treated as bad request
+    Description: Removes a user account only if provided password is valid.
+
+register
+
+    Method: POST
+    Type: mandatory when mod_register is enabled
+    Return values:
+        201 - success
+        409 - user already exists
+        anything else - will be treated as failure
+    Description: Creates a user account.
