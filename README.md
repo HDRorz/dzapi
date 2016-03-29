@@ -1,6 +1,8 @@
 discuz apiserver 
 
-thrift connect python front server with php back server
+thrift connect python front server with discuz php back server
+
+后台由discuz代码精简而成
 
 python front server: flask 0.10.1
 thrift: 0.9.3
@@ -8,7 +10,7 @@ discuz: x3.2
 
 
 
-检查用户是否存在
+####检查用户是否存在
 bool user_exists(username)
 method = GET
 username = 用户名
@@ -18,7 +20,7 @@ return {
 }
 
 
-用户头像
+####用户头像
 string user_avatar(uid, size='middle')
 method = GET
 uid = 用户UID
@@ -26,7 +28,7 @@ size = 'big', 'middle', 'small'
 return url
 
 
-用户登录
+####用户登录
 i32 user_login(username, password, questionid='', answer='', fastloginfield='username')
 method = POST
 username = 用户名
@@ -43,7 +45,7 @@ return {
 }
 
 
-获取用户基本信息
+####获取用户基本信息
 map<string, string> get_user(uid)
 method = GET
 uid = 用户uid
@@ -72,34 +74,34 @@ return array (
     'conisbind' => '0',
     'freeze' => '0',
 )
-/*
- * uid	会员id
- * email	邮箱
- * username	用户名
- * password	密码
- * status	判断用户是否已经删除	需要discuz程序加判断，并增加整体清理的功能。原home字段为flag
- * emailstatus	email是否经过验证	home字段为emailcheck
- * avatarstatus	是否有头像	home字段为avatar
- * videophotostatus	视频认证状态	home
- * adminid	管理员id
- * groupid	会员组id
- * groupexpiry	用户组有效期
- * extgroupids
- * regdate	注册时间
- * credits	总积分
- * notifysound	短信声音
- * timeoffset	时区校正
- * newpm	新短消息数量
- * newprompt	新提醒数目
- * accessmasks	标志
- * allowadmincp	标志
- * onlyacceptfriendpm	是否只接收好友短消息
- * conisbind	用户是否绑定QC
- * freeze   是否冻结
- */
+{
+	uid	会员id
+	email	邮箱
+	username	用户名
+	password	密码
+	status	判断用户是否已经删除	需要discuz程序加判断，并增加整体清理的功能。原home字段为flag
+	emailstatus	email是否经过验证	home字段为emailcheck
+	avatarstatus	是否有头像	home字段为avatar
+	videophotostatus	视频认证状态	home
+	adminid	管理员id
+	groupid	会员组id
+	groupexpiry	用户组有效期
+	extgroupids
+	regdate	注册时间
+	credits	总积分
+	notifysound	短信声音
+	timeoffset	时区校正
+	newpm	新短消息数量
+	newprompt	新提醒数目
+	accessmasks	标志
+	allowadmincp	标志
+	onlyacceptfriendpm	是否只接收好友短消息
+	conisbind	用户是否绑定QC
+	freeze   是否冻结
+ }
 
 
-获取用户积分信息
+####获取用户积分信息
 map<string, string> get_userfield(uid)
 method = GET
 uid = 用户uid
@@ -125,29 +127,29 @@ return array (
     'lastpost' => '1452838048',
     'invisible' => '0',
 )
-/*
- * uid	会员id
- * extcredits1	声望
- * extcredits2	金钱
- * extcredits3	扩展
- * extcredits4	扩展
- * extcredits5	扩展
- * extcredits6	扩展
- * extcredits7	扩展
- * extcredits8	扩展
- * friends	好友个数
- * posts	帖子数
- * threads	主题数
- * digestposts	精华数
- * oltime	在线时间
- * regip	注册IP
- * lastip	最后登陆IP
- * lastvisit	最后访问
- * invisible	是否隐身登录
- */
+{
+	uid	会员id
+	extcredits1	声望
+	extcredits2	金钱
+	extcredits3	扩展
+	extcredits4	扩展
+	extcredits5	扩展
+	extcredits6	扩展
+	extcredits7	扩展
+	extcredits8	扩展
+	friends	好友个数
+	posts	帖子数
+	threads	主题数
+	digestposts	精华数
+	oltime	在线时间
+	regip	注册IP
+	lastip	最后登陆IP
+	lastvisit	最后访问
+	invisible	是否隐身登录
+ }
 
 
-用户注册
+####用户注册
 string user_register(username, password, password2, email, questionid='', answer='')
 method = POST
 username = 用户名
@@ -158,7 +160,7 @@ answer = 安全验证问题答案 ''
 return
 
 
-获取帖子列表（获取第一页时包含置顶）
+####获取帖子列表（获取第一页时包含置顶）
 list<map<string, string>> get_threadslist(fid, page='1', filter='')
 method = GET
 fid = 论坛编号
@@ -215,7 +217,7 @@ return array (
 )
 
 
-获取回复列表（转义了内置bbcode和表情 ordertype=2正序 ordertype=1倒序）
+####获取回复列表（转义了内置bbcode和表情 ordertype=2正序 ordertype=1倒序）
 list<map<string, string>> get_postslist(tid, page='1', ordertype='')
 method = GET
 tid = 帖子编号
